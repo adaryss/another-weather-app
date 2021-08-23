@@ -1,9 +1,9 @@
-export const getDay = (unix, abbr = "false", timezoneOffset) => {
+export const getDay = (unix: number, abbr: string = "false", timezoneOffset: number): string => {
 	const miliseconds = (unix + timezoneOffset) * 1000;
 	const date = new Date(miliseconds);
 	const dayNumber = date.getUTCDay();
 
-	let day;
+	let day: string;
 
 	if (abbr === 'true') {
 		switch (dayNumber) {
@@ -30,14 +30,14 @@ export const getDay = (unix, abbr = "false", timezoneOffset) => {
 	return day;
 }
 
-export const getDate = (unix, timezoneOffset) => {
+export const getDate = (unix: number, timezoneOffset: number): string => {
 	const miliseconds = (unix + timezoneOffset) * 1000;
 	const date = new Date(miliseconds);
 	const day = date.getUTCDate();
 	const month = date.getUTCMonth();
 	const year = date.getUTCFullYear();
 
-	let formattedMonth;
+	let formattedMonth: string;
 	switch (month) {
 		case 0: formattedMonth = "Jan"; break;
 		case 1: formattedMonth = "Feb"; break;
@@ -58,7 +58,7 @@ export const getDate = (unix, timezoneOffset) => {
 	return finalDate;
 }
 
-export const getHour = (unix, timezoneOffset) => {
+export const getHour = (unix: number, timezoneOffset: number): number => {
 	const miliseconds = (unix + timezoneOffset) * 1000;
 	const date = new Date(miliseconds);
 	const hour = date.getUTCHours();
@@ -66,7 +66,7 @@ export const getHour = (unix, timezoneOffset) => {
 	return hour;
 }
 
-export const getTime = (unix, timezoneOffset) => {
+export const getTime = (unix: number, timezoneOffset: number): string => {
 	const miliseconds = (unix + timezoneOffset) * 1000;
 	const date = new Date(miliseconds);
 	const hours = date.getUTCHours();
@@ -78,7 +78,7 @@ export const getTime = (unix, timezoneOffset) => {
 	return time;
 }
 
-export const formatHour = (dt, timezoneOffset) => {
+export const formatHour = (dt: number, timezoneOffset: number): string => {
 	const singleHour = getHour(dt, timezoneOffset);
 	const formattedHour = `${singleHour}.00`;
 

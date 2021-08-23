@@ -20,14 +20,12 @@ export const WeatherSearch = ({ isGeoAccessible, handleGeoClick, units, setUnits
 					Another weather app
 				</H1>
 				<LocationComponents>
-					{isGeoAccessible && (
-						<>
-							<LocationButton onClick={handleGeoClick}>
-								Share your location
-							</LocationButton>
-							<OrText>Or</OrText>
-						</>
-					)}
+
+					<LocationButton onClick={handleGeoClick} disabled={!isGeoAccessible}>
+						Share your location
+					</LocationButton>
+					<OrText>Or</OrText>
+
 					<SearchLocation />
 				</LocationComponents>
 			</ContentWrapper>

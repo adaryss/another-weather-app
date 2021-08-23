@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, FC } from 'react';
 import Layout from 'src/components/Layout';
 
 import { useFetchWeather } from 'src/hooks/useFetchWeather';
@@ -7,14 +7,15 @@ import { useIPLocation } from 'src/hooks/useIPLocation';
 import { handleLocationSuggest } from 'src/utils/handleLocationSuggest';
 import { handleLocationFromCoords } from 'src/utils/handleLocationFromCoords';
 import { Weather } from 'src/components/Weather/Weather';
+import { ICoords, LocationNameType, ShowResultsType, UnitType } from 'src/types/app';
 
 const DEFAULT_COORDS = { long: '', lat: '' };
 
-const Home = () => {
-	const [coords, setCoords] = useState(DEFAULT_COORDS);
-	const [locationName, setLocationName] = useState(null);
-	const [showResults, setShowResults] = useState(false);
-	const [units, setUnits] = useState('');
+const App: FC = () => {
+	const [coords, setCoords] = useState<ICoords>(DEFAULT_COORDS);
+	const [locationName, setLocationName] = useState<LocationNameType>(null);
+	const [showResults, setShowResults] = useState<ShowResultsType>(false);
+	const [units, setUnits] = useState<UnitType>('');
 	const defaultUnit = useIPLocation();
 
 	const {
@@ -41,9 +42,10 @@ const Home = () => {
 		!locationName && handleLocationSuggest(setCoords, setShowResults);
 	}, [handleLocationSuggest, locationName, coords]);
 
-	const handleLocationGeocoder = (geocoder) => {
+	// @ts-ignore mapy.cz API don't support TS
+	const handleLocationGeocoder = (geocoder: any) => {
 		const result = geocoder.getResults();
-		const location = result.items.filter(item => item.coords.x === result.coords.x);
+		const location = result.items.filter((item: any) => item.coords.x === result.coords.x);
 
 		location[0] ? setLocationName(location[0].name) : setLocationName(result.label);
 	}
@@ -58,6 +60,7 @@ const Home = () => {
 		return (
 			<Layout>
 				<div>Something went wrong :(</div>
+				<button onClick={() => location.reload()}>Reload page</button>
 			</Layout>
 		)
 	}
@@ -78,4 +81,4 @@ const Home = () => {
 	)
 }
 
-export default Home;
+export default App;

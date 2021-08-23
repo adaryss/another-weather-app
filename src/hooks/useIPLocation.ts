@@ -1,12 +1,13 @@
 import useSWR from 'swr';
 import { fetcher } from 'src/utils/fetcher';
 import { UNITS } from 'src/constants/units';
+import { UnitType } from 'src/types/app';
 
-export const useIPLocation = () => {
+export const useIPLocation = (): UnitType => {
 	const url = 'http://ip-api.com/json/';
 	const { data, error } = useSWR(url, fetcher);
 
-	let defaultUnit;
+	let defaultUnit: UnitType;
 
 	if (data) {
 		const { countryCode } = data;

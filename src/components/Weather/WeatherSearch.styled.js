@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const Wrapper = styled.div`
 	width: 100%;
@@ -68,9 +68,39 @@ export const LocationButton = styled.button`
 	text-decoration: none;
 	appearance: none;
 
-	&:hover {
-		background: #007AFFE6;
-	}
+	${({ disabled }) => disabled ? css`
+		background: gray;
+		cursor: not-allowed;
+		position: relative;
+
+		&:before {
+			content: 'Access to your geo info is blocked by your browser.';
+			width: calc(100% - 3.6rem);
+			padding: 0.8rem;
+			font-size: 1.2rem;
+			position: absolute;
+			top: calc(-100% - 0.8rem);
+			left: 50%;
+			transform: translateX(-50%);
+			border-radius: 4px;
+			background: #FFFFFF;
+			color: #BABABA;
+			z-index: 1;
+			display: block;
+			opacity: 0;
+			transition: opacity 0.2s ease-in;
+		}
+
+		&:hover {
+			&:before {
+				opacity: 1;
+			}
+		}
+	` : css`
+		&:hover {
+			background: #007AFFE6;
+		}
+	`}
 `;
 
 export const OrText = styled.span`
