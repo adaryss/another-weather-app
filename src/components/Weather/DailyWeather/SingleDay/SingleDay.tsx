@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { FC } from 'react';
+import { LocationNameType } from 'src/types/app';
+import { DailyEntity } from 'src/types/weatherData';
 import { capitalizeFirstLetter } from 'src/utils/capitalizeFirstLetter';
 import { getDate, getDay, getTime } from 'src/utils/formatDate';
 import {
@@ -14,7 +16,13 @@ import {
 	MobileLocation
 } from './SingleDay.styled';
 
-const SingleDay = ({ dayData, city, timezoneOffset }) => {
+interface SingleDayProps {
+	readonly dayData: DailyEntity;
+	readonly city: LocationNameType;
+	readonly timezoneOffset: number;
+}
+
+const SingleDay: FC<SingleDayProps> = ({ dayData, city, timezoneOffset }) => {
 	const {
 		dt,
 		temp: {

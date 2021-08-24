@@ -1,8 +1,13 @@
-import React from 'react';
+import React, { FC } from 'react';
+import { Weather } from 'src/types/weatherData';
 import { getDay, getDate, getTime } from 'src/utils/formatDate';
 import { Wrapper, StyledImg, Date, MoreInfo } from './WeatherContent.styled';
 
-export const WeatherContent = ({ weatherData: { daily, timezone_offset } }) => {
+interface WeatherContentProps {
+	readonly weatherData: Weather;
+}
+
+export const WeatherContent: FC<WeatherContentProps> = ({ weatherData: { daily, timezone_offset } }) => {
 	const today = daily[0];
 
 	return (

@@ -1,9 +1,16 @@
-import React from 'react';
+import React, { FC } from 'react';
+import { LocationNameType } from 'src/types/app';
+import { Weather } from 'src/types/weatherData';
 
 import { capitalizeFirstLetter } from 'src/utils/capitalizeFirstLetter';
 import { Wrapper, DayDegrees, WeatherInfo, Inner, Description, Location } from './WeatherHeader.styled';
 
-export const WeatherHeader = ({ weatherData: { daily, timezone_offset }, city }) => (
+interface WeatherHeaderProps {
+	readonly weatherData: Weather;
+	readonly city: LocationNameType;
+}
+
+export const WeatherHeader: FC<WeatherHeaderProps> = ({ weatherData: { daily }, city }) => (
 	<Wrapper>
 		<DayDegrees>
 			{Math.round(daily[0].temp.day)}°

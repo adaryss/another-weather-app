@@ -37,7 +37,6 @@ export const handleLocationSuggest = (setCoords: SetCoordsType, setShowResults: 
 			});
 			suggest.addListener("suggest", (res: Result) => {
 				setShowResults(true);
-				console.log('res', JSON.stringify(res));
 				setCoords({ lat: res.data.latitude, long: res.data.longitude });
 			});
 		}

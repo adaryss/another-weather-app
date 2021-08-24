@@ -2,13 +2,14 @@ import styled, { css } from 'styled-components';
 import styledMap from 'styled-map';
 import breakpoints from 'src/constants/breakpoints';
 import { UNITS } from 'src/constants/units';
+import { UnitSwitcherType } from './UnitSwitcher';
 
 const activeBackground = styledMap('type', {
 	'result': '#FD653C',
 	'search': '#007AFF',
 });
 
-export const Container = styled.div`
+export const Container = styled.div<{ type: UnitSwitcherType }>`
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -39,10 +40,10 @@ export const Container = styled.div`
 	}
 `;
 
-export const Unit = styled.div`
+export const Unit = styled.div<{ type: UnitSwitcherType; active: boolean }>`
 	font-size: 1.4rem;
 	border-radius: 4px;
-	padding: ${({type}) => type === UNITS.metric ? '0.4rem 0.8rem' : '0.4rem 0.8rem'};
+	padding: 0.4rem 0.8rem;
 	cursor: ${({ active }) => active ? 'default' : 'pointer'};
 	transition: background 0.1s ease-in;
 	height: 3.2rem;

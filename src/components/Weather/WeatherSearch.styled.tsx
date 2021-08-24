@@ -49,7 +49,7 @@ export const H1 = styled.h1`
 	text-align: center;
 `;
 
-export const LocationButton = styled.button`
+export const LocationButton = styled.button<{ disabled: boolean }>`
 	padding: 0 1.2rem;
 	height: 4.8rem;
 	border-radius: 8px;
