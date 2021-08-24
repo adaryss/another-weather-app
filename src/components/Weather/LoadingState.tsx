@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
@@ -46,7 +46,7 @@ const Loader = styled.div`
 
 `;
 
-export const LoadingState = () => (
+export const LoadingState: FC = () => (
 	<Wrapper>
 		<Loader>
 			<div /><div />

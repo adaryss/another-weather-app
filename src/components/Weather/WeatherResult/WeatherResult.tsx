@@ -6,6 +6,16 @@ import { DailyWeather } from 'src/components/Weather/DailyWeather/DailyWeather';
 import { UnitSwitcher } from 'src/components/UnitSwitcher/UnitSwitcher';
 import { BackButton } from '../BackButton/BackButton';
 import { Wrapper, WeatherWrapper } from './WeatherResult.styled';
+import { LocationNameType, SetUnitType, UnitType } from 'src/types/app';
+import { Weather } from 'src/types/weatherData';
+
+interface WeatherResultProps {
+	readonly locationName: LocationNameType;
+	readonly resetSearchState: () => void;
+	readonly weatherData: Weather;
+	readonly units: UnitType;
+	readonly setUnits: SetUnitType;
+}
 
 export const WeatherResult = ({ weatherData, locationName, resetSearchState, units, setUnits }) => {
 	const showLoading = !weatherData || !locationName;
@@ -14,7 +24,7 @@ export const WeatherResult = ({ weatherData, locationName, resetSearchState, uni
 			{showLoading ? (
 				<LoadingState />
 			) : (
-				<WeatherWrapper showLoading={showLoading}>
+				<WeatherWrapper>
 					<BackButton handleOnClick={resetSearchState} />
 					<CurrentWeather city={locationName} weatherData={weatherData} />
 					<DailyWeather city={locationName} weatherData={weatherData} />

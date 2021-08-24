@@ -1,10 +1,15 @@
-import React from 'react';
+import React, { FC } from 'react';
 
 import { DailyCarousel } from '../DailyCarousel';
 import { formatHour } from 'src/utils/formatDate';
 import { Wrapper, SlideText, StyledImg } from './HourlyWeather.styled';
+import { Weather } from 'src/types/weatherData';
 
-export const HourlyWeather = ({ weatherData: { hourly, timezone_offset } }) => {
+interface HourlyWeatherProps {
+	readonly weatherData: Weather;
+}
+
+export const HourlyWeather: FC<HourlyWeatherProps> = ({ weatherData: { hourly, timezone_offset } }) => {
 	const slicedHourlyData = hourly.slice(0, 12);
 
 	return (

@@ -1,8 +1,15 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { SingleDay } from './SingleDay/SingleDay';
 import { Wrapper, DailyHeading } from './DailyWeather.styled';
+import { LocationNameType } from 'src/types/app';
+import { Weather } from 'src/types/weatherData';
 
-const DailyWeather = ({ city, weatherData }) => {
+interface DailyWeatherProps {
+	readonly city: LocationNameType;
+	readonly weatherData: Weather;
+}
+
+const DailyWeather: FC<DailyWeatherProps> = ({ city, weatherData }) => {
 	const { daily, timezone_offset } = weatherData;
 
 	return (

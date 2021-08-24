@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC, ReactNode } from "react";
 import styled from 'styled-components';
 import Head from 'next/head'
 
@@ -9,7 +9,11 @@ const PageWrapper = styled.div`
 	width: 100%;
 `;
 
-const Layout = ({ children }) => (
+interface LayoutProps {
+	readonly children: ReactNode;
+}
+
+const Layout: FC<LayoutProps> = ({ children }) => (
 	<>
 		<Head>
 			<title>Another weather app</title>

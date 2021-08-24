@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { FC } from 'react';
 
 import { SearchLocation } from 'src/components/SearchLocation/SearchLocation';
 import { UnitSwitcher } from 'src/components/UnitSwitcher/UnitSwitcher';
+import { SetUnitType, UnitType } from 'src/types/app';
 import {
 	Wrapper,
 	InnerContainer,
@@ -12,7 +13,14 @@ import {
 	OrText,
 } from './WeatherSearch.styled';
 
-export const WeatherSearch = ({ isGeoAccessible, handleGeoClick, units, setUnits }) => (
+interface WeatherSearchProps {
+	readonly isGeoAccessible: boolean;
+	readonly handleGeoClick: () => void;
+	readonly units: UnitType;
+	readonly setUnits: SetUnitType;
+}
+
+export const WeatherSearch: FC<WeatherSearchProps> = ({ isGeoAccessible, handleGeoClick, units, setUnits }) => (
 	<Wrapper>
 		<InnerContainer>
 			<ContentWrapper>

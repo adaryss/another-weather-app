@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC, ReactNode } from 'react';
 import styled from 'styled-components';
 import Slider from "react-slick";
 import { useMedia } from 'react-use';
@@ -33,7 +33,11 @@ const StyledSlider = styled(Slider)`
 
 `;
 
-export const DailyCarousel = ({ children }) => {
+interface DailyCarouselProps {
+	readonly children: ReactNode;
+}
+
+export const DailyCarousel: FC<DailyCarouselProps> = ({ children }) => {
 	const showNavArrows = useMedia(`(min-width: ${CUSTOM_SLIDER_BREAKPOINT_UP})`);
 
 	const settings = {
