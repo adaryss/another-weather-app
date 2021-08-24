@@ -1,4 +1,4 @@
-## Another boring weather app
+# # Another boring weather app
 
 What is used: Next.js, Typescript, StyledComponents, React Slick slider, OpenWeatherMap API, Seznam.cz maps API
 
