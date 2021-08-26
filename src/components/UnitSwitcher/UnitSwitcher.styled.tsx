@@ -9,38 +9,23 @@ const activeBackground = styledMap('type', {
 	'search': '#007AFF',
 });
 
-export const Container = styled.div<{ type: UnitSwitcherType }>`
+export const Container = styled.div`
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	background: #FFFFFF;
 	border-radius: 4px;
 	position: absolute;
-
-	/* stylelint-disable-next-line value-keyword-case */
-	${({ type }) => type === 'search' ? css`
-		bottom: 3.6rem;
-		left: 50%;
-		transform: translateX(-50%);
-	` : css`
-		top: 1.6rem;
-		right: 1.6rem;
-	`}
+	top: 1.6rem;
+	right: 1.6rem;
 
 	@media (min-width: ${breakpoints.UP.SMALL}) {
-		/* stylelint-disable-next-line value-keyword-case */
-		${({ type }) => type === 'search' ? css`
-			bottom: 3.6rem;
-			left: 50%;
-			transform: translateX(-50%);
-		` : css`
-			top: 2.4rem;
+		top: 2.4rem;
 			right: 2.4rem;
-		`}
 	}
 `;
 
-export const Unit = styled.div<{ type: UnitSwitcherType; active: boolean }>`
+export const Unit = styled.div< { active: boolean }>`
 	font-size: 1.4rem;
 	border-radius: 4px;
 	padding: 0.4rem 0.8rem;

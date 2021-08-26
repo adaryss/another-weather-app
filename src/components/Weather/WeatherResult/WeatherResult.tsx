@@ -28,7 +28,7 @@ export const WeatherResult = ({ weatherData, locationName, resetSearchState, uni
 					<BackButton handleOnClick={resetSearchState} />
 					<CurrentWeather city={locationName} weatherData={weatherData} />
 					<DailyWeather city={locationName} weatherData={weatherData} />
-					<UnitSwitcher type="result" units={units} setUnits={setUnits} />
+					<UnitSwitcher units={units} setUnits={setUnits} />
 				</WeatherWrapper>
 			)}
 		</Wrapper>
