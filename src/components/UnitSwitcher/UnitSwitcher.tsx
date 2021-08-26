@@ -9,28 +9,25 @@ import {
 export type UnitSwitcherType = 'result' | 'search';
 
 interface UnitSwitcherProps {
-	readonly type: UnitSwitcherType;
 	readonly units: UnitType;
 	readonly setUnits: SetUnitType;
 }
 
-export const UnitSwitcher: FC<UnitSwitcherProps> = ({ type, units, setUnits }) => {
+export const UnitSwitcher: FC<UnitSwitcherProps> = ({ units, setUnits }) => {
 	const isMetric = units === UNITS.metric;
 	const isImperial = units === UNITS.imperial;
 	const handleMetricClick = () => !isMetric && setUnits(UNITS.metric);
 	const handleImperialClick = () => !isImperial && setUnits(UNITS.imperial);
 
 	return (
-		<Container type={type}>
+		<Container>
 			<Unit
 				active={isMetric}
-				type={type}
 				onClick={handleMetricClick}>
 				°C
 			</Unit>
 			<Unit
 				active={isImperial}
-				type={type}
 				onClick={handleImperialClick}>
 				°F
 			</Unit>

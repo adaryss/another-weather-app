@@ -38,6 +38,6 @@ export const WeatherSearch: FC<WeatherSearchProps> = ({ isGeoAccessible, handleG
 				</LocationComponents>
 			</ContentWrapper>
 		</InnerContainer>
-		<UnitSwitcher type="search" units={units} setUnits={setUnits} />
+		<UnitSwitcher units={units} setUnits={setUnits} />
 	</Wrapper>
 );
