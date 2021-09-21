@@ -5,4 +5,4 @@ What is used: Next.js, Typescript, StyledComponents, React Slick slider, OpenWea
 Inspired by [Weather Apps](https://www.figma.com/community/file/975891254792978312) Figma design.
 
 
-You can check the live version here: [https://another-weather-app-9wq3v4s3s-adaryss.vercel.app/](https://another-weather-app-9wq3v4s3s-adaryss.vercel.app/)
+You can check the live version here: [https://another-weather-app.vercel.app/](https://another-weather-app-9wq3v4s3s-adaryss.vercel.app/)
