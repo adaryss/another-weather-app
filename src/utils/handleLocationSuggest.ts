@@ -1,4 +1,4 @@
-import { SetCoordsType, setShowResultsType } from "src/types/app";
+import { SetCoordsType, SetListIsHovered, setShowResultsType } from "src/types/app";
 
 export interface Result {
 	readonly phrase: string;
@@ -24,20 +24,46 @@ export interface ResultData {
 	readonly mmtype: string;
 }
 
-export const handleLocationSuggest = (setCoords: SetCoordsType, setShowResults: setShowResultsType) => {
+export const handleLocationSuggest = (setCoords: SetCoordsType, setShowResults: setShowResultsType, setListIsHovered: SetListIsHovered) => {
 	if (typeof window !== 'undefined') {
-		const input = document.getElementById("location");
+		const input = <HTMLInputElement>document.getElementById("location");
 
 		if (input) {
 			// @ts-ignore mapy.cz API don't support TS
 			const suggest = new SMap.Suggest(input);
+			let suggestedItems = [];
 			suggest.urlParams({
 				type: 'municipality',
 				lang: 'en',
 			});
-			suggest.addListener("suggest", (res: Result) => {
+			suggest.addListener('suggest', (res: Result) => {
 				setShowResults(true);
 				setCoords({ lat: res.data.latitude, long: res.data.longitude });
+			});
+			suggest.addListener('enter', () => {
+				if (suggestedItems.length > 0) {
+					const firstSuggestedItem = suggestedItems[0];
+					input.value = firstSuggestedItem.phrase;
+					setTimeout(() => {
+						setShowResults(true);
+						setCoords({ lat: firstSuggestedItem.latitude, long: firstSuggestedItem.longitude });
+					}, 200);
+				}
+			});
+			suggest.addListener('request-items', (data) => {
+				suggestedItems = data;
+			});
+			suggest.addListener('open', () => {
+				let suggestList: Element;
+				setTimeout(() => { 
+					suggestList = document.querySelector('ul.smap-suggest');
+					suggestList.addEventListener('mouseover', () => {
+						setListIsHovered(true);
+					});
+					suggestList.addEventListener('mouseleave', () => {
+						setListIsHovered(false);
+					});
+				}, 100)
 			});
 		}
 	}

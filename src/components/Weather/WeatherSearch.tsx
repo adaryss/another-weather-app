@@ -18,9 +18,10 @@ interface WeatherSearchProps {
 	readonly handleGeoClick: () => void;
 	readonly units: UnitType;
 	readonly setUnits: SetUnitType;
+	readonly listIsHovered: boolean;
 }
 
-export const WeatherSearch: FC<WeatherSearchProps> = ({ isGeoAccessible, handleGeoClick, units, setUnits }) => (
+export const WeatherSearch: FC<WeatherSearchProps> = ({ isGeoAccessible, handleGeoClick, units, setUnits, listIsHovered }) => (
 	<Wrapper>
 		<InnerContainer>
 			<ContentWrapper>
@@ -34,7 +35,7 @@ export const WeatherSearch: FC<WeatherSearchProps> = ({ isGeoAccessible, handleG
 					</LocationButton>
 					<OrText>Or</OrText>
 
-					<SearchLocation />
+					<SearchLocation listIsHovered={listIsHovered} />
 				</LocationComponents>
 			</ContentWrapper>
 		</InnerContainer>

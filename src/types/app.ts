@@ -14,3 +14,5 @@ export type setShowResultsType = (params: ShowResultsType) => void;
 export type UnitType = 'imperial' | 'metric' | '' | undefined;
 
 export type SetUnitType = (params: UnitType) => void;
+
+export type SetListIsHovered = (params: boolean) => void;
