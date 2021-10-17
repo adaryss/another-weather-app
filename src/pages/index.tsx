@@ -16,6 +16,7 @@ const App: FC = () => {
 	const [locationName, setLocationName] = useState<LocationNameType>(null);
 	const [showResults, setShowResults] = useState<ShowResultsType>(false);
 	const [units, setUnits] = useState<UnitType>('');
+	const [listIsHovered, setListIsHovered] = useState<boolean>(false);
 	const defaultUnit = useIPLocation();
 
 	const {
@@ -39,7 +40,7 @@ const App: FC = () => {
 	}
 
 	useEffect(() => {
-		!locationName && handleLocationSuggest(setCoords, setShowResults);
+		!locationName && handleLocationSuggest(setCoords, setShowResults, setListIsHovered);
 	}, [handleLocationSuggest, locationName, coords]);
 
 	// @ts-ignore mapy.cz API don't support TS
@@ -76,6 +77,7 @@ const App: FC = () => {
 				units={units}
 				setUnits={setUnits}
 				showResults={showResults}
+				listIsHovered={listIsHovered}
 			/>
 		</Layout>
 	)

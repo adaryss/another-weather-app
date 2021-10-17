@@ -1,6 +1,6 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
-export const InputWrapper = styled.div`
+export const InputWrapper = styled.div<{ listIsHovered: boolean }>`
 	position: relative;
 	width: 100%;
 	font-size: 1.6rem;
@@ -29,6 +29,13 @@ export const InputWrapper = styled.div`
 			&:hover {
 				background: lightgray;
 			}
+
+			${({listIsHovered}) => !listIsHovered && css`
+				&:nth-child(1) {
+					background: lightgray;
+				}
+			`}
+
 		}
 
 		span.text {

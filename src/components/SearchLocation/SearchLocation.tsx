@@ -1,9 +1,13 @@
 import React, { FC } from 'react';
 import { InputWrapper, SearchInput } from './SearchLocation.styled';
 
-export const SearchLocation: FC = () => {
+interface SearchLocationProps {
+	readonly listIsHovered: boolean;
+}
+
+export const SearchLocation: FC<SearchLocationProps> = ({ listIsHovered }) => {
 	return (
-		<InputWrapper>
+		<InputWrapper listIsHovered={listIsHovered}>
 			<SearchInput id="location" type="text" name="location" placeholder="Search for city..." />
 		</InputWrapper>
 	);

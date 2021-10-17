@@ -14,6 +14,7 @@ interface WeatherProps {
 	readonly units: UnitType;
 	readonly setUnits: SetUnitType;
 	readonly showResults: ShowResultsType;
+	readonly listIsHovered: boolean;
 }
 
 export const Weather: FC<WeatherProps> = ({
@@ -25,6 +26,7 @@ export const Weather: FC<WeatherProps> = ({
 	units,
 	setUnits,
 	showResults,
+	listIsHovered,
 }) => (
 	<>
 		{showResults ? (
@@ -41,6 +43,7 @@ export const Weather: FC<WeatherProps> = ({
 				handleGeoClick={handleGeoClick}
 				units={units}
 				setUnits={setUnits}
+				listIsHovered={listIsHovered}
 			/>
 		)}
 	</>
