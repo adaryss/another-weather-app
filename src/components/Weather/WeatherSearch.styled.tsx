@@ -26,6 +26,8 @@ export const InnerContainer = styled.div`
 	margin: 0 auto;
 	height: 100%;
 	padding: 12.4rem 0;
+	position: relative;
+	z-index: 1;
 `;
 
 export const ContentWrapper = styled.div`
