@@ -1,86 +1,34 @@
-import React, { useState, useEffect, FC } from 'react';
-import Layout from 'src/components/Layout';
+import React, { FC } from 'react';
+import { GetServerSideProps } from 'next'
 
-import { useFetchWeather } from 'src/hooks/useFetchWeather';
-import { useGetUserPosition } from 'src/hooks/useGetUserPosition';
-import { useIPLocation } from 'src/hooks/useIPLocation';
-import { handleLocationSuggest } from 'src/utils/handleLocationSuggest';
-import { handleLocationFromCoords } from 'src/utils/handleLocationFromCoords';
-import { Weather } from 'src/components/Weather/Weather';
-import { ICoords, LocationNameType, ShowResultsType, UnitType } from 'src/types/app';
+import { CitiesWeatherProvider } from 'src/hooks/useCitiesWeatherContext';
 
-const DEFAULT_COORDS = { long: '', lat: '' };
+import { ICitiesWeatherData } from 'src/types/weatherData';
+import Home from 'src/components/Home';
+import { cityWeatherFetcher } from 'src/utils/cityWeatherFetcher';
 
-const App: FC = () => {
-	const [coords, setCoords] = useState<ICoords>(DEFAULT_COORDS);
-	const [locationName, setLocationName] = useState<LocationNameType>(null);
-	const [showResults, setShowResults] = useState<ShowResultsType>(false);
-	const [units, setUnits] = useState<UnitType>('');
-	const [listIsHovered, setListIsHovered] = useState<boolean>(false);
-	const defaultUnit = useIPLocation();
+interface AppProps {
+	readonly initialWeatherData: ICitiesWeatherData;
+}
 
-	const {
-		isGeoAccessible,
-		handleGeoClick,
-		error: positionError,
-	} = useGetUserPosition(setCoords, setShowResults);
-	const {
-		data: weatherData,
-		error: weatherError,
-	} = useFetchWeather(coords, units);
+const App: FC<AppProps> = ({ initialWeatherData }) => (
+	<CitiesWeatherProvider initialValue={{dataMetric: initialWeatherData.dataMetric, dataImperial: initialWeatherData.dataImperial}}>
+		<Home initialWeatherData={initialWeatherData} />
+	</CitiesWeatherProvider>
+)
 
-	useEffect(() => {
-		setUnits(defaultUnit);
-	}, [defaultUnit]);
+export const getServerSideProps: GetServerSideProps = async () => {
+	const initialWeatherDataMetric = await cityWeatherFetcher('metric');
+	const initialWeatherDataImperial = await cityWeatherFetcher('imperial');
 
-	const resetSearchState = () => {
-		setCoords(DEFAULT_COORDS);
-		setLocationName(null);
-		setShowResults(false);
-	}
-
-	useEffect(() => {
-		!locationName && handleLocationSuggest(setCoords, setShowResults, setListIsHovered);
-	}, [handleLocationSuggest, locationName, coords]);
-
-	// @ts-ignore mapy.cz API don't support TS
-	const handleLocationGeocoder = (geocoder: any) => {
-		const result = geocoder.getResults();
-		const location = result.items.filter((item: any) => item.coords.x === result.coords.x);
-
-		location[0] ? setLocationName(location[0].name) : setLocationName(result.label);
-	}
-
-	useEffect(() => {
-		if (coords !== DEFAULT_COORDS) {
-			handleLocationFromCoords(coords.long, coords.lat, handleLocationGeocoder);
+	return {
+		props: {
+			initialWeatherData: {
+				dataMetric: initialWeatherDataMetric,
+				dataImperial: initialWeatherDataImperial,
+			}
 		}
-	}, [coords]);
-
-	if (weatherError || positionError) {
-		return (
-			<Layout>
-				<div>Something went wrong :(</div>
-				<button onClick={() => location.reload()}>Reload page</button>
-			</Layout>
-		)
 	}
-
-	return (
-		<Layout>
-			<Weather
-				locationName={locationName}
-				isGeoAccessible={isGeoAccessible}
-				handleGeoClick={handleGeoClick}
-				weatherData={weatherData}
-				resetSearchState={resetSearchState}
-				units={units}
-				setUnits={setUnits}
-				showResults={showResults}
-				listIsHovered={listIsHovered}
-			/>
-		</Layout>
-	)
 }
 
 export default App;

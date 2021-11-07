@@ -25,7 +25,7 @@ export const InnerContainer = styled.div`
 	width: 100%;
 	margin: 0 auto;
 	height: 100%;
-	padding: 12.4rem 0 16.4rem;
+	padding: 12.4rem 0;
 `;
 
 export const ContentWrapper = styled.div`

@@ -81,3 +81,8 @@ export interface FeelsLike {
 	eve: number;
 	morn: number;
 }
+
+export interface ICitiesWeatherData {
+	readonly dataMetric: Weather[];
+	readonly dataImperial: Weather[];
+}

@@ -1,11 +1,11 @@
 import useSWR from 'swr';
-import { fetcher } from 'src/utils/fetcher';
+import { ipFetcher } from 'src/utils/ipFetcher';
 import { UNITS } from 'src/constants/units';
 import { UnitType } from 'src/types/app';
 
 export const useIPLocation = (): UnitType => {
 	const url = 'http://ip-api.com/json/';
-	const { data, error } = useSWR(url, fetcher);
+	const { data, error } = useSWR(url, ipFetcher);
 
 	let defaultUnit: UnitType;
 

@@ -40,10 +40,10 @@ export const ContentCol = styled.div`
 	flex-direction: column;
 `;
 
-export const Temperature = styled.div`
+export const Temperature = styled.div<{ color?: string }>`
 	font-size: 4.8rem;
 	line-height: 5.2rem;
-	color: #FFFFFF;
+	color: ${({ color }) => color ?? '#FFFFFF'};
 	text-align: center;
 `;
 
@@ -59,8 +59,8 @@ export const StyledImg = styled.img`
 	}
 `;
 
-export const Day = styled.div`
-	color: #FFFFFF;
+export const Day = styled.div<{ color?: string }>`
+	color: ${({ color }) => color ?? '#FFFFFF'};;
 	font-size: 2rem;
 	line-height: 2.4rem;
 	text-align: center;
